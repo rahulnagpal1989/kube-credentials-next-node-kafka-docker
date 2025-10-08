@@ -3,8 +3,6 @@ import { Router } from 'express';
 import { findCredential, insertCredential } from './db';
 import os from 'os';
 import { Kafka, Partitioners } from 'kafkajs';
-import { timeStamp } from 'console';
-
 
 const router = Router();
 const workerId = process.env.WORKER_ID || os.hostname();
