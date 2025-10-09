@@ -11,22 +11,11 @@ const producer = kafka.producer({ createPartitioner: Partitioners.LegacyPartitio
 
 // Connect with retry logic
 (async () => {
-  let retries = 0;
-  const maxRetries = 10;
-  while (retries < maxRetries) {
-    try {
-      await producer.connect();
-      console.log('Connected to Kafka');
-      break;
-    } catch (err) {
-      retries++;
-      console.log(`Kafka connection attempt ${retries}/${maxRetries} failed:`, err);
-      if (retries === maxRetries) {
-        console.error('Failed to connect to Kafka after maximum retries');
-      } else {
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      }
-    }
+  try {
+    await producer.connect();
+    console.log('Connected to Kafka');
+  } catch (err) {
+    console.log('Failed to connect to Kafka', err);
   }
 })();
 
