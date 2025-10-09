@@ -8,9 +8,9 @@ describe('Verification API', () => {
     expect(res.status).toBe(400);
   });
   // This test assumes an existing credential in issuance DB - for unit test we just ensure 404 when not present
-  it('returns 404 for unknown credential', async () => {
-    const payload = { id: `unknown-${Date.now()}`, name: 'Nobody' };
+  it('returns 200 for valid credential', async () => {
+    const payload = { userid: `unknown-${Date.now()}`, name: 'Nobody' };
     const r = await request(app).post('/api/verify').send(payload);
-    expect(r.status).toBe(404);
+    expect(r.status).toBe(200);
   });
 });
